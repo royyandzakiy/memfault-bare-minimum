@@ -1,6 +1,6 @@
 list(APPEND
    COMPONENT_SRCS
-        main.c
+        main.cpp
         memfault-config/memfault_platform_port.c
         wifi.c
         led.c

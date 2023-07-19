@@ -11,7 +11,7 @@ static void initialize_nvs() {
   ESP_ERROR_CHECK(err);
 }
 
-void memfault_init() {
+extern void memfault_init() {
    memfault_boot();
    memfault_platform_device_info_boot();
    memfault_device_info_dump();

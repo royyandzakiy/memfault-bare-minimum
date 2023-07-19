@@ -13,6 +13,6 @@ enum LED_COLORS {
   kLedColor_Blue = 4,
 };
 
-void led_set_color(enum LED_COLORS color);
+extern void led_set_color(enum LED_COLORS color);
 
-void led_init(void);
+extern void led_init(void);

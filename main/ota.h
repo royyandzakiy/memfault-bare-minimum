@@ -6,4 +6,4 @@
 #include "memfault/esp_port/http_client.h"
 #include "led.h"
 
-void memfault_ota();
+extern void memfault_ota();

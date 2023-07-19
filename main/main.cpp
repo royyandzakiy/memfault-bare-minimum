@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "esp_task.h"
 #include "nvs_flash.h"
 #include "nvs.h"
@@ -12,15 +12,14 @@
 #include "led.h"
 #include "ota.h"
 
-// Periodically post any Memfault data that has not yet been posted.
 static void post_data_task(void *args) {
   const uint32_t interval_sec = 60;
   const TickType_t delay_ms = (1000 * interval_sec) / portTICK_PERIOD_MS;
 
-  MEMFAULT_LOG_INFO("Data poster task up and running every %" PRIu32 "s.", interval_sec);
+  MEMFAULT_LOG_INFO("Data poster task up and running every %u s.", interval_sec);
 
   while (true) {
-    memfault_metrics_heartbeat_add(MEMFAULT_METRICS_KEY(PosterTaskNumSchedules), 1); // count the number of times this task has run
+    memfault_metrics_heartbeat_add(MEMFAULT_METRICS_KEY(PosterTaskNumSchedules), 1);
 
     memfault_esp_port_wifi_autojoin();
 
@@ -35,13 +34,13 @@ static void post_data_task(void *args) {
   }
 }
 
-void app_main() {
-  memfault_init();
+extern "C" void app_main() {
+  // memfault_init();
   initialize_nvs();
 
-  wifi_creds_nvs(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
+  // wifi_creds_nvs(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
 
-  const portBASE_TYPE res =
-    xTaskCreate(post_data_task, "poster", ESP_TASK_MAIN_STACK, NULL, ESP_TASK_MAIN_PRIO, NULL);
-  MEMFAULT_ASSERT(res == pdTRUE);
+  // const portBASE_TYPE res =
+  //   xTaskCreate((TaskFunction_t)post_data_task, "poster", ESP_TASK_MAIN_STACK, NULL, ESP_TASK_MAIN_PRIO, NULL);
+  // MEMFAULT_ASSERT(res == pdTRUE);
 }
