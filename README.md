@@ -30,6 +30,7 @@ This project is meant to provide a basic memfault template to use and develop fu
 
             <details>
             <summary>Setting through menuconfig</summary>
+            <br/>
             <img src="docs/insert-project-key-menuconfig.png" width="700">
             <br/>
             <img src="docs/change-coredump-flash-menuconfig.png" width="700">
@@ -37,6 +38,7 @@ This project is meant to provide a basic memfault template to use and develop fu
 
             <details>
             <summary>Setting through SDK config editor</summary>
+            <br/>
             <img src="docs/insert-project-key-configeditor.png" width="700">
             <br/>
             <img src="docs/change-coredump-flash-configeditor.png" width="700">
