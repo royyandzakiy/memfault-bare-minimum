@@ -2,6 +2,11 @@
 
 This project is meant to provide a basic memfault template to use and develop further. This is made by implementing all steps from the guide in the [memfault/espressif-esp32-guide](https://docs.memfault.com/docs/mcu/espressif-esp32-guide/), and taking some snippets from the template [esp32-standalone-example](https://github.com/memfault/esp32-standalone-example), into a fully functioning template with bare minimum steps to follow through, just to get coding quickly. If you would like further indepth and fine grained tuning, it is very well recommended to checkout the two references above and adjust accordingly.
 
+## Features
+- WiFi
+- Memfault OTA
+- Memfault Heartbeat Metric Post
+
 ## Getting Started
 1. Prepare the environment
     - install VSCode & ESP IDF Extension
