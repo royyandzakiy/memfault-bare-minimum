@@ -16,8 +16,10 @@ This project is meant to provide a basic memfault template to use and develop fu
 3. set the memfault sdk folder location in `CMakeLists.txt`
     - open `CMakeLists.txt` (in root folder, not in `main`), and change the line next to MEMFAULT_FIRMWARE_SDK with the absolute path of your `memfault-firmware-sdk` root folder 
         ```
-        set(MEMFAULT_FIRMWARE_SDK C:/Users/koeip/Documents/Royyan/project-coding/iot/memfault-firmware-sdk)
-        include(${MEMFAULT_FIRMWARE_SDK}/ports/esp_idf/memfault.cmake)
+        ...
+        set(MEMFAULT_FIRMWARE_SDK C:/Users/koeip/Documents/Royyan/project-coding/iot/memfault-firmware-sdk) # comment this out if you are not Royyan!
+        # set(MEMFAULT_FIRMWARE_SDK path/to/memfault-firmware-sdk) # insert your memfault-firmware-sdk path here!
+        ...
         ```
 
 4. setup sdkconfig and insert Project Key
@@ -25,12 +27,6 @@ This project is meant to provide a basic memfault template to use and develop fu
     - `idf.py menuconfig`
         - navigate through `Component config` > `Memfault` > `Memfault project key` > `<memfault project key>`
         - insert Memfault Project Key gathered from the 
-            <details>
-            <summary>Setting through SDK config editor</summary>
-            <img src="docs/insert-project-key-configeditor.png" width="700">
-            <br/>
-            <img src="docs/change-coredump-flash-configeditor.png" width="700">
-            </details>
 
         - navigate through `Component config` > `Core dump` > `Data destination` > choose `Flash`
 
@@ -40,6 +36,13 @@ This project is meant to provide a basic memfault template to use and develop fu
             <br/>
             <img src="docs/change-coredump-flash-menuconfig.png" width="700">
             </details>
+
+            <details>
+            <summary>Setting through SDK config editor</summary>
+            <img src="docs/insert-project-key-configeditor.png" width="700">
+            <br/>
+            <img src="docs/change-coredump-flash-configeditor.png" width="700">
+            </details>            
 
     - `idf.py build`
 
