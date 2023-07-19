@@ -6,5 +6,21 @@ config MEMFAULT_ESP32_MAIN_FIRMWARE_VERSION
     help
         The version of the main firmware. Used when the device reports in as
         well as for OTA checks.
+        
+endmenu
+
+menu "WiFi Credentials Configuration"
+
+config WIFI_SSID
+    string "WiFi SSID"
+    default ""
+    help
+        WiFi SSID
+
+config WIFI_PASS
+    string "WiFi Password"
+    default ""
+    help
+        WiFi Password
 
 endmenu

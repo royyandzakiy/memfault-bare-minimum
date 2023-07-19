@@ -6,12 +6,13 @@
 #include "memfault/components.h"
 #include "memfault/esp_port/core.h"
 #include "memfault/esp_port/http_client.h"
+#include "led.h"
 #include "nvs.h"
 #include "nvs_flash.h"
 
 static bool prv_handle_ota_upload_available(void *user_ctx) {
   // set blue when performing update
-  // led_set_color(kLedColor_Blue);
+  led_set_color(kLedColor_Blue);
 
   MEMFAULT_LOG_INFO("Starting OTA download ...");
   return true;
@@ -52,12 +53,12 @@ static void prv_memfault_ota(void) {
   int rv = memfault_esp_port_ota_update(&handler);
   if (rv == 0) {
     MEMFAULT_LOG_INFO("Up to date!");
-    // led_set_color(kLedColor_Green);
+    led_set_color(kLedColor_Green);
   } else if (rv == 1) {
     MEMFAULT_LOG_INFO("Update available!");
   } else if (rv < 0) {
     MEMFAULT_LOG_ERROR("OTA update failed, rv=%d", rv);
-    // led_set_color(kLedColor_Red);
+    led_set_color(kLedColor_Red);
   }
 }
 
@@ -98,7 +99,7 @@ static void prv_poster_task(void *args) {
       int err = memfault_esp_port_http_client_post_data();
       // if the check-in succeeded, set green, otherwise clear.
       // gives a quick eyeball check that the app is alive and well
-      // led_set_color((err == 0) ? kLedColor_Green : kLedColor_Red);
+      led_set_color((err == 0) ? kLedColor_Green : kLedColor_Red);
     }
 
     // check for OTA update
@@ -130,5 +131,5 @@ void app_main() {
     xTaskCreate(prv_poster_task, "poster", ESP_TASK_MAIN_STACK, NULL, ESP_TASK_MAIN_PRIO, NULL);
   MEMFAULT_ASSERT(res == pdTRUE);
 
-  connect_direct("TNCAPED32BF", "PXakKXP6YfHTfhEA");
+  connect_direct(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
 }
