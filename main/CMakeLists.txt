@@ -7,6 +7,7 @@ list(APPEND
 set(COMPONENT_ADD_INCLUDEDIRS
    .
    memfault
+   ${MEMFAULT_FIRMWARE_SDK}/ports/include
 )
 
 register_component()
