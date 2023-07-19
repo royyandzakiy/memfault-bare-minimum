@@ -10,7 +10,7 @@
 #include <sys/param.h>
 
 #include "argtable3/argtable3.h"
-#include "cmd_decl.h"
+#include "global.h"
 #include "esp_console.h"
 #include "esp_event_loop.h"
 #include "esp_wifi.h"
@@ -19,6 +19,10 @@
 #include "nvs.h"
 #include "nvs_flash.h"
 #include "tcpip_adapter.h"
+
+#include "memfault/esp_port/http_client.h"
+#include "memfault/esp_port/core.h"
+#include "memfault/components.h"
 
 // enable for more verbose debug logs
 #define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
@@ -170,8 +174,8 @@ static void prv_save_wifi_creds(const char* ssid, const char* password) {
   }
 }
 
-void wifi_creds_nvs(char * ssid_, char * pass_) {
-  prv_save_wifi_creds(ssid_, pass_);
+void wifi_creds_nvs(char * ssid, char * pass) {
+  prv_save_wifi_creds(ssid, pass);
 }
 
 //! Return ssid + password pointers, or NULL if not found
@@ -298,4 +302,22 @@ void register_wifi(void) {
                                         .func = &wifi_creds_set,
                                         .argtable = &wifi_creds_args};
   ESP_ERROR_CHECK(esp_console_cmd_register(&config_cmd));
+}
+
+void memfault_esp_port_wifi_autojoin() {
+  if (memfault_esp_port_wifi_connected()) {
+    return;
+  }
+
+  char *ssid, *pass;
+  wifi_load_creds(&ssid, &pass);
+  if ((ssid == NULL) || (pass == NULL) || (strnlen(ssid, 64) == 0) || (strnlen(pass, 64) == 0)) {
+    MEMFAULT_LOG_DEBUG("No WiFi credentials found");
+    return;
+  }
+  MEMFAULT_LOG_DEBUG("Starting WiFi Autojoin ...");
+  bool result = wifi_join(ssid, pass);
+  if (!result) {
+    MEMFAULT_LOG_DEBUG("Failed to join WiFi network");
+  }
 }
