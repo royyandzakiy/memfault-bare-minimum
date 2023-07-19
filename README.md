@@ -187,6 +187,7 @@ This project is meant to provide a basic memfault template to use and develop fu
     I (27) boot: ESP-IDF v4.4.2-1-gce1fde4b3b-dirty 2nd stage bootloader
     I (27) boot: compile time 21:18:10
     I (27) boot: chip revision: 1
+    ...
     </pre>
     </details>  
 
