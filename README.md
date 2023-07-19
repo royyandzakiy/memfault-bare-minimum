@@ -25,9 +25,7 @@ This project is meant to provide a basic memfault template to use and develop fu
 4. setup sdkconfig and insert Project Key
     - `idf.py fullclean`
     - `idf.py menuconfig`
-        - navigate through `Component config` > `Memfault` > `Memfault project key` > `<memfault project key>`
-        - insert Memfault Project Key gathered from the 
-
+        - navigate through `Component config` > `Memfault` > `Memfault project key` > `<memfault project key>` (insert Memfault Project Key gathered from the Memfault Cloud Dashboard)
         - navigate through `Component config` > `Core dump` > `Data destination` > choose `Flash`
 
             <details>
