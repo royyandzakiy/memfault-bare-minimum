@@ -97,19 +97,6 @@ static struct {
   struct arg_end* end;
 } join_args;
 
-int connect_direct(char * ssid_, char * pass_) {
-  ESP_LOGI(__func__, "Connecting to '%s'", ssid_);
-
-  bool connected =
-    wifi_join(ssid_, pass_);
-  if (!connected) {
-    ESP_LOGW(__func__, "Connection timed out");
-    return 1;
-  }
-  ESP_LOGI(__func__, "Connected");
-  return 0;
-}
-
 static int connect(int argc, char** argv) {
   int nerrors = arg_parse(argc, argv, (void**)&join_args);
   if (nerrors != 0) {
@@ -181,6 +168,10 @@ static void prv_save_wifi_creds(const char* ssid, const char* password) {
     // Close
     nvs_close(nvs_handle);
   }
+}
+
+void wifi_creds_nvs(char * ssid_, char * pass_) {
+  prv_save_wifi_creds(ssid_, pass_);
 }
 
 //! Return ssid + password pointers, or NULL if not found
