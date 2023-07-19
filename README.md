@@ -28,6 +28,7 @@ This project is meant to provide a basic memfault template to use and develop fu
         1. navigate through `Component config` > `Memfault` > `Memfault project key` > `<memfault project key>` (insert Memfault Project Key gathered from the Memfault Cloud Dashboard)
         2. navigate through `Component config` > `Core dump` > `Data destination` > choose `Flash`
         3. navigate through `Partition table` > `Partition table` > choose `Custom Partition Table CSV` AND make sure the `Custom partition CSV file` is `partitions.csv` or change accordingly
+        4. navigate through `WiFi Credentials Configuration` > fill in `WiFi SSID` AND `WiFi Password`
 
             <details>
             <summary>Setting through menuconfig</summary>

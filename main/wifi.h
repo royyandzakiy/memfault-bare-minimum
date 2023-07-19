@@ -1,7 +1,5 @@
 #pragma once
 
-#include "freertos/FreeRTOS.h"
-#include "freertos/semphr.h"
 
 // Attempt to join a wifi network
 void wifi_creds_nvs(char * ssid, char * pass);

@@ -19,10 +19,6 @@
 #include "nvs_flash.h"
 #include "tcpip_adapter.h"
 
-#include "memfault/esp_port/http_client.h"
-#include "memfault/esp_port/core.h"
-#include "memfault/components.h"
-
 // enable for more verbose debug logs
 #define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
 #include "esp_log.h"
@@ -173,10 +169,6 @@ static void prv_save_wifi_creds(const char* ssid, const char* password) {
   }
 }
 
-void wifi_creds_nvs(char * ssid, char * pass) {
-  prv_save_wifi_creds(ssid, pass);
-}
-
 //! Return ssid + password pointers, or NULL if not found
 void wifi_load_creds(char** ssid, char** password) {
   // first check if the creds are already loaded
@@ -301,6 +293,16 @@ void register_wifi(void) {
                                         .func = &wifi_creds_set,
                                         .argtable = &wifi_creds_args};
   ESP_ERROR_CHECK(esp_console_cmd_register(&config_cmd));
+}
+
+// ============== ADDED BY ROYYAN ==============
+
+#include "memfault/esp_port/http_client.h"
+#include "memfault/esp_port/core.h"
+#include "memfault/components.h"
+
+void wifi_creds_nvs(char * ssid, char * pass) {
+  prv_save_wifi_creds(ssid, pass);
 }
 
 void memfault_esp_port_wifi_autojoin() {

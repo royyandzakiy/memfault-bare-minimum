@@ -2,6 +2,7 @@
 #include "esp_task.h"
 #include "nvs_flash.h"
 #include "nvs.h"
+#include "freertos/semphr.h"
 
 #include "memfault/components.h"
 #include "memfault/esp_port/core.h"

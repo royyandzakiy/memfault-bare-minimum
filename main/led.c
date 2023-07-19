@@ -9,10 +9,6 @@
 
 #include "led.h"
 
-#include <stdbool.h>
-#include <stdint.h>
-#include <stdlib.h>
-
 #if CONFIG_BLINK_LED_RMT
   #include "led_strip.h"
 #endif
