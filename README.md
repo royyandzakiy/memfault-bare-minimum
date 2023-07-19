@@ -6,7 +6,7 @@ This project is meant to provide a basic memfault template to use and develop fu
 1. Prepare the environment
     - install VSCode & ESP IDF Extension
     - setup ESP IDF Extension by downloading `v4.4.0`
-    - download [memfault-firmware-sdk](https://github.com/memfault/memfault-firmware-sdk), save the folder path for later
+    - download [memfault-firmware-sdk](https://github.com/memfault/memfault-firmware-sdk) `git clone https://github.com/memfault/memfault-firmware-sdk`, save the folder path for later
 
 2. set the memfault sdk folder location in `CMakeLists.txt`
     - open `CMakeLists.txt` (in root folder, not in `main`), and change the line next to MEMFAULT_FIRMWARE_SDK with the absolute path of your `memfault-firmware-sdk` root folder 
