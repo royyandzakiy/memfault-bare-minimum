@@ -6,14 +6,9 @@ This project is meant to provide a basic memfault template to use and develop fu
 1. Prepare the environment
     - install VSCode & ESP IDF Extension
     - setup ESP IDF Extension by downloading `v4.4.0`
+    - download [memfault-firmware-sdk](https://github.com/memfault/memfault-firmware-sdk), save the folder path for later
 
-2. get memfault Project Key
-    - create memfault account
-    - navigate through Settings > Project Key
-        
-        ![](docs/get-project-key.png)
-
-3. set the memfault sdk folder location in `CMakeLists.txt`
+2. set the memfault sdk folder location in `CMakeLists.txt`
     - open `CMakeLists.txt` (in root folder, not in `main`), and change the line next to MEMFAULT_FIRMWARE_SDK with the absolute path of your `memfault-firmware-sdk` root folder 
         ```
         ...
@@ -22,9 +17,14 @@ This project is meant to provide a basic memfault template to use and develop fu
         ...
         ```
 
+3. get memfault Project Key
+    - create memfault account, login into [app.memfault.com](https://app.memfault.com/)
+    - navigate through Settings > Project Key
+        
+        ![](docs/get-project-key.png)
+
 4. setup sdkconfig and insert Project Key
-    - `idf.py fullclean`
-    - `idf.py menuconfig`
+    - open terminal in root folder `idf.py menuconfig`, or you can do this step by opening the ESP IDF SDK Config Editor in VSCode
         - navigate through `Component config` > `Memfault` > `Memfault project key` > `<memfault project key>` (insert Memfault Project Key gathered from the Memfault Cloud Dashboard)
         - navigate through `Component config` > `Core dump` > `Data destination` > choose `Flash`
 
@@ -43,8 +43,7 @@ This project is meant to provide a basic memfault template to use and develop fu
             <br/>
             <img src="docs/change-coredump-flash-configeditor.png" width="700">
             </details>            
-
-    - `idf.py build`
+    - build `idf.py fullclean build`
 
 
 - enjoy!
