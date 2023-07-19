@@ -20,33 +20,56 @@
 
 #include "memfault/components.h"
 #include "memfault/ports/reboot_reason.h"
+#include "memfault/esp_port/version.h"
+#if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 0)
+  #include "esp_mac.h"
+#endif
+#include <string.h>
+
+#include "esp_system.h"
+#include "memfault/components.h"
 
 #include <stdbool.h>
 
-void memfault_platform_get_device_info(sMemfaultDeviceInfo *info) {
-  // !FIXME: Populate with platform device information
+#ifndef MEMFAULT_ESP32_SOFTWARE_TYPE
+  #define MEMFAULT_ESP32_SOFTWARE_TYPE "esp32-main"
+#endif
 
-  // IMPORTANT: All strings returned in info must be constant
-  // or static as they will be used _after_ the function returns
+#ifndef MEMFAULT_ESP32_HW_REVISION
+  #define MEMFAULT_ESP32_HW_REVISION CONFIG_IDF_TARGET "-proto"
+#endif
 
-  // See https://mflt.io/version-nomenclature for more context
-  *info = (sMemfaultDeviceInfo) {
-    // An ID that uniquely identifies the device in your fleet
-    // (i.e serial number, mac addr, chip id, etc)
-    // Regular expression defining valid device serials: ^[-a-zA-Z0-9_]+$
-    .device_serial = "ESP32_MEMFAULT",
-     // A name to represent the firmware running on the MCU.
-    // (i.e "ble-fw", "main-fw", or a codename for your project)
-    .software_type = "app-fw",
-    // The version of the "software_type" currently running.
-    // "software_type" + "software_version" must uniquely represent
-    // a single binary
-    .software_version = "1.0.0",
-    // The revision of hardware for the device. This value must remain
-    // the same for a unique device.
-    // (i.e evt, dvt, pvt, or rev1, rev2, etc)
-    // Regular expression defining valid hardware versions: ^[-a-zA-Z0-9_\.\+]+$
-    .hardware_version = "dvt1",
+static char s_device_serial[32];
+
+// NOTE: Some versions of the esp-idf use locking when reading mac info
+// so this isn't safe to call from an interrupt
+static void prv_get_device_serial(char *buf, size_t buf_len) {
+  // Use the ESP32's MAC address as unique device id:
+  uint8_t mac[6];
+  esp_read_mac(mac, ESP_MAC_WIFI_STA);
+
+  size_t curr_idx = 0;
+  for (size_t i = 0; i < sizeof(mac); i++) {
+    size_t space_left = buf_len - curr_idx;
+    int bytes_written = snprintf(&buf[curr_idx], space_left, "%02X", (int)mac[i]);
+    if (bytes_written < space_left) {
+      curr_idx += bytes_written;
+    } else {  // we are out of space, return what we got, it's NULL terminated
+      return;
+    }
+  }
+}
+
+void memfault_platform_device_info_boot(void) {
+  prv_get_device_serial(s_device_serial, sizeof(s_device_serial));
+}
+
+void memfault_platform_get_device_info(struct MemfaultDeviceInfo *info) {
+  *info = (struct MemfaultDeviceInfo){
+    .device_serial = s_device_serial,
+    .hardware_version = MEMFAULT_ESP32_HW_REVISION,
+    .software_version = CONFIG_MEMFAULT_ESP32_MAIN_FIRMWARE_VERSION,
+    .software_type = MEMFAULT_ESP32_SOFTWARE_TYPE,
   };
 }
 

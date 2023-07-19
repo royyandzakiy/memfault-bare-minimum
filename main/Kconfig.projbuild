@@ -1,0 +1,10 @@
+menu "Memfault App Configuration"
+
+config MEMFAULT_ESP32_MAIN_FIRMWARE_VERSION
+    string "Main firmware version"
+    default "1.0.0-dev"
+    help
+        The version of the main firmware. Used when the device reports in as
+        well as for OTA checks.
+
+endmenu
