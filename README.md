@@ -6,6 +6,7 @@ This project is meant to provide a basic memfault template to use and develop fu
 - WiFi
 - Memfault OTA
 - Memfault Heartbeat Metric Post
+- NVS
 
 ## Getting Started
 1. Prepare the environment
