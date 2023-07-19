@@ -129,4 +129,6 @@ This project is meant to provide a basic memfault template to use and develop fu
 - enjoy!
 
 ## To Do
-[] add OTA
+- add wifi
+- add pubish data
+- add OTA

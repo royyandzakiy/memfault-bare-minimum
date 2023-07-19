@@ -1,7 +1,8 @@
 list(APPEND
    COMPONENT_SRCS
-        main.cpp
+        main.c
         memfault-config/memfault_platform_port.c
+        cmd_wifi_legacy.c
 )
 
 set(COMPONENT_ADD_INCLUDEDIRS
