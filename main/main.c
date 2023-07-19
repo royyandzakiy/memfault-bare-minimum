@@ -89,7 +89,7 @@ static void prv_poster_task(void *args) {
 
   while (true) {
     // count the number of times this task has run
-    // memfault_metrics_heartbeat_add(MEMFAULT_METRICS_KEY(PosterTaskNumSchedules), 1);
+    memfault_metrics_heartbeat_add(MEMFAULT_METRICS_KEY(PosterTaskNumSchedules), 1);
     // attempt to autojoin wifi, if configured
     memfault_esp_port_wifi_autojoin();
 
@@ -121,15 +121,13 @@ static void initialize_nvs() {
 
 void app_main() {
   memfault_boot();
-  extern void memfault_platform_device_info_boot(void);
   memfault_platform_device_info_boot();
   memfault_device_info_dump();
   
   initialize_nvs();
+  wifi_creds_nvs(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
 
   const portBASE_TYPE res =
     xTaskCreate(prv_poster_task, "poster", ESP_TASK_MAIN_STACK, NULL, ESP_TASK_MAIN_PRIO, NULL);
   MEMFAULT_ASSERT(res == pdTRUE);
-
-  connect_direct(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
 }
