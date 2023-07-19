@@ -19,17 +19,15 @@
 //! TODO: Fill in FIXMEs below for your platform
 
 #include "memfault/components.h"
-#include "memfault/ports/reboot_reason.h"
 #include "memfault/esp_port/version.h"
 #if ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(4, 4, 0)
   #include "esp_mac.h"
 #endif
-#include <string.h>
+// #include <string.h>
 
-#include "esp_system.h"
-#include "memfault/components.h"
+// #include "esp_system.h"
 
-#include <stdbool.h>
+// #include <stdbool.h>
 
 #ifndef MEMFAULT_ESP32_SOFTWARE_TYPE
   #define MEMFAULT_ESP32_SOFTWARE_TYPE "esp32-main"

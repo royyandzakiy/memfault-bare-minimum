@@ -1,30 +1,25 @@
-// #include "memfault/esp_port/core.h"
-// #include "cmd_decl.h"
-// #include "nvs.h"
-// #include "nvs_flash.h"
-
-#include <inttypes.h>
-#include <stdio.h>
+// #include <inttypes.h>
+// #include <stdio.h>
 #include <string.h>
 
-#include "argtable3/argtable3.h"
+// #include "argtable3/argtable3.h"
 #include "cmd_decl.h"
-#include "driver/uart.h"
-#include "esp_console.h"
-#include "esp_log.h"
-#include "esp_system.h"
+// #include "driver/uart.h"
+// #include "esp_console.h"
+// #include "esp_log.h"
+// #include "esp_system.h"
 #include "esp_task.h"
-#include "esp_vfs_dev.h"
-#include "esp_vfs_fat.h"
-#include "freertos/FreeRTOS.h"
-#include "freertos/semphr.h"
-#include "freertos/timers.h"
-#include "linenoise/linenoise.h"
+// #include "esp_vfs_dev.h"
+// #include "esp_vfs_fat.h"
+// #include "freertos/FreeRTOS.h"
+// #include "freertos/semphr.h"
+// #include "freertos/timers.h"
+// #include "linenoise/linenoise.h"
 #include "memfault/components.h"
-#include "memfault/esp_port/cli.h"
+// #include "memfault/esp_port/cli.h"
 #include "memfault/esp_port/core.h"
 #include "memfault/esp_port/http_client.h"
-#include "memfault/esp_port/version.h"
+// #include "memfault/esp_port/version.h"
 #include "nvs.h"
 #include "nvs_flash.h"
 
