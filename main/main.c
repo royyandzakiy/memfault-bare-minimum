@@ -1,14 +1,15 @@
 #include <string.h>
-
-#include "global.h"
 #include "esp_task.h"
+#include "nvs_flash.h"
+#include "nvs.h"
 
 #include "memfault/components.h"
 #include "memfault/esp_port/core.h"
+
+#include "misc.h"
+#include "wifi.h"
 #include "led.h"
-#include "nvs.h"
 #include "ota.h"
-#include "nvs_flash.h"
 
 // Periodically post any Memfault data that has not yet been posted.
 static void post_data_task(void *args) {
@@ -33,21 +34,10 @@ static void post_data_task(void *args) {
   }
 }
 
-static void initialize_nvs() {
-  esp_err_t err = nvs_flash_init();
-  if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND) {
-    ESP_ERROR_CHECK(nvs_flash_erase());
-    err = nvs_flash_init();
-  }
-  ESP_ERROR_CHECK(err);
-}
-
 void app_main() {
-  memfault_boot();
-  memfault_platform_device_info_boot();
-  memfault_device_info_dump();
-  
+  memfault_init();
   initialize_nvs();
+
   wifi_creds_nvs(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
 
   const portBASE_TYPE res =

@@ -10,7 +10,6 @@
 #include <sys/param.h>
 
 #include "argtable3/argtable3.h"
-#include "global.h"
 #include "esp_console.h"
 #include "esp_event_loop.h"
 #include "esp_wifi.h"

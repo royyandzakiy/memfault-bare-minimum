@@ -2,7 +2,6 @@
 
 #include <string.h>
 
-#include "global.h"
 #include "esp_task.h"
 
 #include "memfault/components.h"
