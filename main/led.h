@@ -1,10 +1,3 @@
-//! @file
-//!
-//! Copyright (c) Memfault, Inc.
-//! See License.txt for details
-//!
-//! LED control module header.
-
 #pragma once
 
 #ifdef __cplusplus
