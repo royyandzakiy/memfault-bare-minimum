@@ -35,12 +35,13 @@ static void post_data_task(void *args) {
 }
 
 extern "C" void app_main() {
-  // memfault_init();
+  memfault_init();
   initialize_nvs();
+  led_init();
 
-  // wifi_creds_nvs(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
+  wifi_creds_nvs(CONFIG_WIFI_SSID, CONFIG_WIFI_PASS);
 
-  // const portBASE_TYPE res =
-  //   xTaskCreate((TaskFunction_t)post_data_task, "poster", ESP_TASK_MAIN_STACK, NULL, ESP_TASK_MAIN_PRIO, NULL);
-  // MEMFAULT_ASSERT(res == pdTRUE);
+  const portBASE_TYPE res =
+    xTaskCreate((TaskFunction_t)post_data_task, "poster", ESP_TASK_MAIN_STACK, NULL, ESP_TASK_MAIN_PRIO, NULL);
+  MEMFAULT_ASSERT(res == pdTRUE);
 }

@@ -1,9 +1,17 @@
 #pragma once
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include "esp_task.h"
 
 #include "memfault/components.h"
 #include "memfault/esp_port/http_client.h"
 #include "led.h"
 
-extern void memfault_ota();
+void memfault_ota();
+
+#ifdef __cplusplus
+}
+#endif

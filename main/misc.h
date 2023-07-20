@@ -1,6 +1,10 @@
 #pragma once
 
-extern void memfault_platform_device_info_boot(void);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void memfault_platform_device_info_boot(void);
 
 static void initialize_nvs() {
   esp_err_t err = nvs_flash_init();
@@ -11,8 +15,12 @@ static void initialize_nvs() {
   ESP_ERROR_CHECK(err);
 }
 
-extern void memfault_init() {
+void memfault_init() {
    memfault_boot();
    memfault_platform_device_info_boot();
    memfault_device_info_dump();
 }
+
+#ifdef __cplusplus
+}
+#endif
